@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>课堂专注度分析</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>课堂专注度分析</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success">
+            专注度得分：{{ score }}，等级：{{ level }}
+        </div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">选择课堂</label>
+            <select class="form-select" name="session_id" required>
+                {% for s in sessions %}
+                    <option value="{{ s.id }}">{{ s.course.name }} - {{ s.start_time }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">上传课堂图片（简化示例）</label>
+            <input type="file" class="form-control" name="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">开始分析</button>
+    </form>
+</div>
+</body>
+</html>
+

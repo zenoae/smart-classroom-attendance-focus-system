@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>智能课堂考勤与专注度分析系统</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<style>
+
+body{
+background:#f5f6fa;
+}
+
+.card{
+border:none;
+border-radius:12px;
+}
+
+.system-title{
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark shadow">
+<div class="container-fluid">
+
+<span class="navbar-brand mb-0 h1">
+智能课堂考勤与专注度分析系统
+</span>
+
+</div>
+</nav>
+
+<div class="container mt-4">
+
+<h3 class="mb-4 system-title">系统概览</h3>
+
+<div class="row mb-4">
+
+<div class="col-md-6">
+<div class="card shadow p-3">
+
+<h6>学生数量</h6>
+<p class="display-5">{{ student_count }}</p>
+
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card shadow p-3">
+
+<h6>课程数量</h6>
+<p class="display-5">{{ course_count }}</p>
+
+</div>
+</div>
+
+</div>
+
+
+<h4 class="mb-3">系统功能</h4>
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+<div class="card shadow p-4 text-center">
+
+<h5>学生管理</h5>
+<p>管理学生信息与人脸数据</p>
+
+<a href="{{ url_for('attendance.list_students') }}"
+class="btn btn-primary w-100">
+进入模块
+</a>
+
+</div>
+</div>
+
+<div class="col-md-4 mb-3">
+<div class="card shadow p-4 text-center">
+
+<h5>课程管理</h5>
+<p>创建与管理课堂课程</p>
+
+<a href="{{ url_for('attendance.manage_courses') }}"
+class="btn btn-primary w-100">
+进入模块
+</a>
+
+</div>
+</div>
+
+<div class="col-md-4 mb-3">
+<div class="card shadow p-4 text-center">
+
+<h5>课堂考勤</h5>
+<p>发起课堂签到与人脸识别</p>
+
+<a href="{{ url_for('attendance.start_session') }}"
+class="btn btn-success w-100">
+开始考勤
+</a>
+
+</div>
+</div>
+
+<div class="col-md-6 mb-3">
+<div class="card shadow p-4 text-center">
+
+<h5>课堂统计与可视化</h5>
+<p>查看课堂出勤与统计数据</p>
+
+<a href="{{ url_for('stats.overview') }}"
+class="btn btn-secondary w-100">
+查看统计
+</a>
+
+</div>
+</div>
+
+<div class="col-md-6 mb-3">
+<div class="card shadow p-4 text-center">
+
+<h5>课堂专注度分析</h5>
+<p>分析课堂学生专注情况</p>
+
+<a href="{{ url_for('focus.analyze_focus') }}"
+class="btn btn-warning w-100">
+开始分析
+</a>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>课堂统计与可视化</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+    <h2>课堂统计与可视化</h2>
+    <form method="get" class="mb-3">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-6">
+                <label class="form-label">选择课堂</label>
+                <select class="form-select" name="session_id">
+                    <option value="">请选择</option>
+                    {% for s in sessions %}
+                        <option value="{{ s.id }}"
+                                {% if selected_session and s.id == selected_session.id %}selected{% endif %}>
+                            {{ s.course.name }} - {{ s.start_time }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">查看</button>
+            </div>
+        </div>
+    </form>
+
+    {% if selected_session %}
+        <h5 class="mt-4">考勤情况</h5>
+        <canvas id="attendanceChart" height="120"></canvas>
+
+        <h5 class="mt-4">专注度分布</h5>
+        <canvas id="focusChart" height="120"></canvas>
+    {% endif %}
+</div>
+
+{% if selected_session %}
+    <script>
+        const attendanceData = {{ attendance_summary | tojson }};
+        const focusData = {{ focus_summary | tojson }};
+
+        const attCtx = document.getElementById('attendanceChart');
+        new Chart(attCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(attendanceData),
+                datasets: [{
+                    label: '人数',
+                    data: Object.values(attendanceData),
+                    backgroundColor: '#0d6efd'
+                }]
+            }
+        });
+
+        const focCtx = document.getElementById('focusChart');
+        new Chart(focCtx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(focusData),
+                datasets: [{
+                    data: Object.values(focusData),
+                    backgroundColor: ['#198754', '#ffc107', '#dc3545']
+                }]
+            }
+        });
+    </script>
+{% endif %}
+</body>
+</html>
+
