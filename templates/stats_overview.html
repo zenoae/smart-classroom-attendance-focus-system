@@ -31,11 +31,24 @@
     </form>
 
     {% if selected_session %}
-        <h5 class="mt-4">考勤情况</h5>
-        <canvas id="attendanceChart" height="120"></canvas>
-
-        <h5 class="mt-4">专注度分布</h5>
-        <canvas id="focusChart" height="120"></canvas>
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <h5>考勤情况</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="attendanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h5>专注度分布</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="focusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 </div>
 
